@@ -1,6 +1,7 @@
 package com.snow2;
 
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Map;
 
 public class Main {
@@ -24,8 +25,10 @@ public class Main {
         for (String key : skiResort.keySet()) {
             if (key.equals(resortName)) {
                 SkiSlope s = skiResort.get(key);
-                System.out.print("最長滑走距離" + s.getFullLength() + "m、" + s.getCourse() + "コース、");
-                System.out.println("リフト数" + s.getLift() + "基、" + "パークアイテム数" + s.getParkItem());
+                System.out.printf("%-8d%s\n", s.getFullLength(), "最高滑走距離(m)");
+                System.out.printf("%-8d%s\n", s.getCourse(), "コース数(コース)");
+                System.out.printf("%-8d%s\n", s.getLift(), "リフト数(基)");
+                System.out.printf("%-8d%s\n", s.getParkItem(), "パークアイテム数");
                 System.out.println("");
             }
         }
@@ -34,9 +37,13 @@ public class Main {
         System.out.println("ゲストハウスの利用人数を入力してください");
         try {
             int guest = new java.util.Scanner(System.in).nextInt();
-            System.out.println(guest + "人で登録します");
-        } catch (Exception e) {
-            System.out.println("数字で入力してください");
+            if (guest < 1) {
+                throw new IllegalArgumentException("1以上で入力してください");
+            } else {
+                System.out.println(guest + "人で登録します");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("数字で入力してください。");
         } finally {
             System.out.println("終了します");
         }
