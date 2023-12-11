@@ -38,12 +38,14 @@ public class Main {
         try {
             int guest = new java.util.Scanner(System.in).nextInt();
             if (guest < 1) {
-                throw new IllegalArgumentException("1以上で入力してください");
+                throw new IllegalArgumentException();
             } else {
                 System.out.println(guest + "人で登録します");
             }
+        } catch (IllegalArgumentException e) {
+            System.out.println("1以上で入力してください。");
         } catch (InputMismatchException e) {
-            System.out.println("数字で入力してください。");
+            System.out.println("数字で入力してください");
         } finally {
             System.out.println("終了します");
         }
